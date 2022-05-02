@@ -18,10 +18,10 @@ const NormalLoginForm = () => {
       <Form.Item
         name="username"
         rules={[
-          {
-            required: true,
-            message: 'Please input your Username!',
-          },
+          {required: true,message: '请输入你的用户名'},
+          {min:4,message:'用户名是4~12位'},
+          {max:12,message:'用户名是4~12位'},
+          {pattern:/^\w+$/,message:'用户名由数字,字母,下划线必须由组成'}
         ]}
       >
         <Input prefix={<AliwangwangOutlined className="site-form-item-icon" />} placeholder="Username" />
@@ -29,10 +29,10 @@ const NormalLoginForm = () => {
       <Form.Item
         name="password"
         rules={[
-          {
-            required: true,
-            message: 'Please input your Password!',
-          },
+          {required: true,message: '请输入你的密码'},
+          {min:6,message:'密码是6~20位'},
+          {max:20,message:'用户名是6~20位'},
+          {pattern:/^\w+$/,message:'密码由数字,字母,下划线必须由组成'}
         ]}
       >
         <Input
@@ -43,11 +43,11 @@ const NormalLoginForm = () => {
       </Form.Item>
       <Form.Item>
         <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox>Remember me</Checkbox>
+          <Checkbox>记住我</Checkbox>
         </Form.Item>
 
         <a className="login-form-forgot" href="/#">
-          Forgot password
+          忘记密码
         </a>
       </Form.Item>
       <Form.Item>
