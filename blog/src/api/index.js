@@ -1,5 +1,6 @@
 import axios from "./MyAxios"
 import { BASE_URL } from "../config";
+// import jsonp from 'jsonp';
 
 //登录接口的api
 export const reqLogin =  (values)=>{
@@ -8,4 +9,18 @@ export const reqLogin =  (values)=>{
       username,
       password
     })
+}
+
+//博客列表
+//登录接口的api
+export const reqList =  ()=>{
+  return axios.get(`${BASE_URL}/admin/index/list`);
+}
+
+//查询天气的接口
+export const reqWheater = ()=>{
+  return axios.get(`https://devapi.qweather.com/v7/weather/now?location=101110101&key=7e0c9cf9291f4c2490d868fadeb69088`);
+  // jsonp('https://wis.qq.com/weather/common?source=pc&weather_type=observe%7Cforecast_1h%7Cforecast_24h%7Cindex%7Calarm%7Climit%7Ctips%7Crise&province=%E9%99%95%E8%A5%BF%E7%9C%81&city=%E8%A5%BF%E5%AE%89%E5%B8%82',(err,data)=>{
+  //   console.log(data);
+  // })
 }

@@ -8,7 +8,6 @@ import {useNavigate} from 'react-router-dom';
 
 function Login(props) {
   let navigate = useNavigate();
-  // console.log(props);
 
   function Redirect({ to }) {
     let navigate = useNavigate();

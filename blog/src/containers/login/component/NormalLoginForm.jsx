@@ -1,6 +1,6 @@
-import { Form, Input, Button, Checkbox, message } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import { LockOutlined, AliwangwangOutlined } from '@ant-design/icons';
-import { reqLogin } from '../../../api';
+import { reqLogin} from '../../../api';
 
 
 const NormalLoginForm = (props) => {
@@ -59,17 +59,8 @@ const NormalLoginForm = (props) => {
         />
       </Form.Item>
       <Form.Item>
-        <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox>记住我</Checkbox>
-        </Form.Item>
-
-        <a className="login-form-forgot" href="/#">
-          忘记密码
-        </a>
-      </Form.Item>
-      <Form.Item>
         <Button type="primary" htmlType="submit" className="login-form-button">
-          Login
+          登录
         </Button>
       </Form.Item>
     </Form>

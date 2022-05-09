@@ -1,0 +1,14 @@
+.layout {
+  height: 100%;
+}
+.layout .sider {
+  color: white;
+}
+.layout .content {
+  background-color: white;
+  margin: 20px 20px 0 20px;
+}
+.layout .footer {
+  text-align: center;
+  color: #4646b9;
+}

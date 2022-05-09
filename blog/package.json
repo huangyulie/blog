@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",
@@ -10,6 +11,8 @@
     "axios": "^0.27.2",
     "babel-plugin-import": "^1.13.5",
     "customize-cra": "^1.0.0",
+    "dayjs": "^1.11.2",
+    "jsonp": "^0.2.1",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
     "nprogress": "^0.2.0",
@@ -22,6 +25,7 @@
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
+    "screenfull": "^6.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
