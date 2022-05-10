@@ -8,20 +8,21 @@ import {createDeleteUserInfo} from '../../../redux/actions/login_action';
 import dayjs from 'dayjs';
 import { reqWheater } from '../../../api';
 import W from './img/00.png';
+import {useLocation} from 'react-router-dom';
 
 
 function Header(props) {
   let [isFull,setIsfull] = useState(false);
   let [date,setDate] = useState(dayjs().format('YYYY年MM月DD日 HH:mm:ss A'));
   let {username} = props.userInfo.user;
+  let menu = props.menuInfo;
   let [Whether,setWhether] = useState({
     temp:'未显示',
     text:'未查询到'
   });
 
+  let location = useLocation();
   
-
-
   let ref = useRef(null);
   useEffect(()=>{
     setInterval(() => {
@@ -32,7 +33,7 @@ function Header(props) {
       setWhether(ref.current.now);
     }
     data();
-  },[]);
+  },[location]);
 
   
 
@@ -73,7 +74,7 @@ function Header(props) {
       </div>
       <div className="header-bottom">
         <div className='header-bottom-left'>
-          柱状图
+          {menu?menu:'首页'}
         </div>
         <div className="header-bottom-right">
           {date}
@@ -87,7 +88,10 @@ function Header(props) {
 }
 
 export default connect(
-  state => {return {userInfo:state.userInfo}},
+  state => {return {
+    userInfo:state.userInfo,
+    menuInfo:state.menuInfo
+  }},
   {deleteUserInfo:createDeleteUserInfo}
 )
 (Header)

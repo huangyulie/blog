@@ -6,10 +6,15 @@ import {
     UserOutlined,
     TeamOutlined,
     InsertRowBelowOutlined,
+    LineChartOutlined,
+    PieChartOutlined,
+    BarChartOutlined
 } from '@ant-design/icons';
 import logo from '../../../static/img/true.png'
 import './css/left.css'
 import {useNavigate} from 'react-router-dom'
+import {connect} from 'react-redux';
+import {createSaveTitleAction} from '../../../redux/actions/meue_action';
 
 function getItem(label, key, icon, children, type) {
     return {
@@ -30,13 +35,11 @@ const items = [
     getItem('用户管理', 'user', <UserOutlined />),
     getItem('角色管理', 'role', <TeamOutlined />),
     getItem('图形图表', 'charts', <InsertRowBelowOutlined />, [
-        getItem('bar管理', 'charts/bar'),
-        getItem('line管理', 'charts/line'),
-        getItem('pie管理', 'charts/pie'),
+        getItem('柱状图', 'charts/bar',<BarChartOutlined />),
+        getItem('折线图', 'charts/line',<LineChartOutlined />),
+        getItem('饼图', 'charts/pie',<PieChartOutlined />),
     ]),
 ];
-
-
 
 
 const Left = (props) => {
@@ -45,9 +48,10 @@ const Left = (props) => {
     useEffect(() => {
       navigate('home');
     },[]);//eslint-disable-line
-
+    let p = {...props};
     const Demo = (props)=>{
         navigate(props.keyPath[0]);
+        p.menuInfo(props.domEvent.target.innerHTML);
     }
     return (
         <div>
@@ -67,4 +71,8 @@ const Left = (props) => {
     );
 };
 
-export default Left;
+export default connect(
+    state =>{return {}},
+    {menuInfo:createSaveTitleAction},
+)
+(Left)
