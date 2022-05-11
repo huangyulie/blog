@@ -24,3 +24,20 @@ export const reqWheater = ()=>{
   //   console.log(data);
   // })
 }
+
+// 查询博客分类的api
+export const reqCategory = ()=>{
+  return axios.get(`${BASE_URL}/admin/manger/category/list`);
+}
+// 添加
+export const reqAddCategory = (values)=>{
+  let {name} = values;
+  return axios.post(`${BASE_URL}/admin/manger/category/addList`,{
+      name
+  })
+}
+
+// 修改
+export const reqChangegory = (values)=>{
+  
+}

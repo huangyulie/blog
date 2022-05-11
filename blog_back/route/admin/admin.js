@@ -15,4 +15,13 @@ admin.get('/index/list',(req,res)=>{
     })
 })
 
+// 后台获取基本列表
+admin.get('/manger/category/list',require('./manger/category'));
+
+// 后台添加分类列表
+admin.post("/manger/category/addList",require('./manger/addCategory'));
+
+// 后台修改分类的列表
+admin.post('/manger/category.changeList',require('./manger/changeCategory'));
+
 module.exports = admin;
