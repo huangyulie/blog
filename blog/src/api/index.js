@@ -39,5 +39,17 @@ export const reqAddCategory = (values)=>{
 
 // 修改
 export const reqChangegory = (values)=>{
-  
+  let {name,prename} = values;
+  return axios.post(`${BASE_URL}/admin/manger/category/changeList`,{
+    name,
+    prename
+  })
+}
+
+export const reqBlog = (values)=>{
+  let {page,pagesize} = values;
+  return axios.get(`${BASE_URL}/admin/blog/list`,{params:{
+    page,
+    pagesize
+  }})
 }

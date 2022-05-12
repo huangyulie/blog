@@ -1,4 +1,4 @@
-import { Modal,Button } from 'antd'
+import { Modal,Button, message } from 'antd'
 import React,{useState,useEffect,useRef}  from 'react'
 import './css/header.css'
 import { FullscreenOutlined,FullscreenExitOutlined,ExclamationCircleOutlined } from '@ant-design/icons'
@@ -17,8 +17,8 @@ function Header(props) {
   let {username} = props.userInfo.user;
   let menu = props.menuInfo;
   let [Whether,setWhether] = useState({
-    temp:'未显示',
-    text:'未查询到'
+    temp:null,
+    text:null
   });
 
   let location = useLocation();
@@ -29,8 +29,12 @@ function Header(props) {
       setDate(dayjs().format('YYYY年MM月DD日 HH:mm:ss A'));
     }, 1000);
     const data = async()=>{
-      ref.current =  await reqWheater();
-      setWhether(ref.current.now);
+      try{
+        ref.current =  await reqWheater();
+         setWhether(ref.current.now);
+      }catch(err){
+        message.error('天气查询接口失效');
+      }
     }
     data();
   },[location]);
@@ -79,7 +83,7 @@ function Header(props) {
         <div className="header-bottom-right">
           {date}
           <img src={W} alt="天气图标" />
-          {Whether.text} 温度:{Whether.temp}°
+          {Whether.text==null?'未查询到':Whether.text} 温度:{Whether.temp==null?'未查询到':Whether.temp}°
         </div>
       </div>
     </header>

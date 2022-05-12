@@ -22,6 +22,9 @@ admin.get('/manger/category/list',require('./manger/category'));
 admin.post("/manger/category/addList",require('./manger/addCategory'));
 
 // 后台修改分类的列表
-admin.post('/manger/category.changeList',require('./manger/changeCategory'));
+admin.post('/manger/category/changeList',require('./manger/changeCategory'));
+
+// 后台的详细博客列表
+admin.get("/blog/list",require('./blog/blogList'))
 
 module.exports = admin;

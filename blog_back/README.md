@@ -25,3 +25,10 @@ localhost:4000
 | username | String |    Y     | 用户名 |
 | password | String |    Y     |  密码  |
 
+## 3.获取博客列表的
+地址:localhost:4000/admin/blog
+
+方式:GET
+
+参数类型:
+

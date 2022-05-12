@@ -1,7 +1,7 @@
 import React,{useState,useEffect,useRef} from 'react'
 import { Card,Button,Table,Modal,Form, Input, message} from 'antd';
 import {PlusOutlined,DropboxOutlined} from '@ant-design/icons';
-import { reqCategory,reqAddCategory } from '../../api';
+import { reqCategory,reqAddCategory,reqChangegory } from '../../api';
 
 export default function Category() {
   // 芜湖
@@ -12,7 +12,8 @@ export default function Category() {
   let [isLoading,setIsLoading] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
   let [opra,setOpra] = useState(false);
-
+  // 修改的按钮
+  let [prename,setPrename] = useState(null);
 
   useEffect(()=>{
     const test = async()=>{
@@ -26,11 +27,14 @@ export default function Category() {
   },[])//eslint-disable-line
 
   const showAddModal = () => {
+    setPrename('');
     setOpra('添加分类');
     setIsModalVisible(true);
   };
   const showChangeModal = (text) => {
-    console.log(text);
+    prename = text;
+    setPrename(prename);
+    console.log(prename);
     setOpra('修改分类');
     setIsModalVisible(true);
   };
@@ -53,10 +57,19 @@ export default function Category() {
           setIsModalVisible(false);
         }
       }else{
-        console.log('123123');
+        data['prename'] = prename;
+        let a = await reqChangegory(data);
+        if(a==='该分类已存在'){
+          message.error(a);
+          return;
+        }else{
+          ref.current = await reqCategory();
+          setCategory(ref.current.data.reverse());
+          formRef.current.resetFields();
+          setIsModalVisible(false);
+          message.success(a);
+        }
       }
-      // formRef.current.resetFields();
-      // setIsModalVisible(false);
     })
     .catch((err)=>{
       message.warning('表单输入有误,请重新输入');
@@ -96,7 +109,7 @@ export default function Category() {
           dataSource={dataSource} 
           columns={columns} 
           rowKey={'_id'}
-          pagination={{pageSize:5}}
+          pagination={{pageSize:5,showQuickJumper:true}}
           loading={isLoading}
           />
       </Card>
@@ -123,8 +136,9 @@ export default function Category() {
                 message: '输入不能为空!!!',
               },
             ]}
+            initialValue={prename}
           >
-            <Input prefix={<DropboxOutlined className="site-form-item-icon" />} placeholder="名称" />
+            <Input prefix={<DropboxOutlined className="site-form-item-icon" />} placeholder={'名称'} />
           </Form.Item>
         </Form>
       </Modal>
