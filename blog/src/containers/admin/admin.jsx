@@ -14,6 +14,9 @@ import Role from '../roles/roles';
 import Line from '../line/line';
 import Bar from '../bar/bar';
 import Pie from '../pie/pie'
+import Detail from '../detail/Detail'
+import Update from '../update/Update';
+import Addblog from '../addblog/Addblog'
 
 function Admin(props) {
 
@@ -24,9 +27,6 @@ function Admin(props) {
     });
     return null;
   }
-
-  
-
   const {isLogin} = props.userInfo;
   const {  Footer, Sider, Content } = Layout;
   if(isLogin === true){
@@ -43,6 +43,9 @@ function Admin(props) {
                   <Route path='home' element={<Home />} />
                   <Route path='product/category' element={<Category />} />
                   <Route path='product/product' element={<Product />} />
+                  <Route path='product/product/addblog' element={<Addblog />}/>
+                  <Route path='product/product/detail/:id' element={<Detail />}/>
+                  <Route path='product/product/update/:id' element={<Update />} />
                   <Route path='user' element={<User />} />
                   <Route path='role' element={<Role />} />
                   <Route path='charts/bar' element={<Bar />} />

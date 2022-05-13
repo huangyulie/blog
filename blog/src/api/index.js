@@ -53,3 +53,13 @@ export const reqBlog = (values)=>{
     pagesize
   }})
 }
+
+export const reqSearchBlog = (values)=>{
+  let {page,pagesize,name,value} = values;
+  return axios.get(`${BASE_URL}/admin/blog/search`,{params:{
+    page,
+    pagesize,
+    name,
+    value,
+  }})
+}

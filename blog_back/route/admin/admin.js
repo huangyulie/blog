@@ -25,6 +25,9 @@ admin.post("/manger/category/addList",require('./manger/addCategory'));
 admin.post('/manger/category/changeList',require('./manger/changeCategory'));
 
 // 后台的详细博客列表
-admin.get("/blog/list",require('./blog/blogList'))
+admin.get("/blog/list",require('./blog/blogList'));
+
+// 后台搜索博客列表
+admin.get("/blog/search",require('./blog/searchBlog'));
 
 module.exports = admin;
