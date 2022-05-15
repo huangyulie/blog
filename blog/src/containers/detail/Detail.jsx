@@ -24,6 +24,7 @@ function Detail(props) {
     useEffect(()=>{
       data();
     },[blog,idName])//eslint-disable-line
+    
     const data = async()=>{
       let {pathname} = c;
       pathname = pathname.split('/');
@@ -69,7 +70,7 @@ function Detail(props) {
               <Item>
                   <span className='itemspan'>博客封面:</span>
                   <span className='itemdiv'>
-                      <img src={blog.imgs}  alt="看看我的"/>
+                      <img src={blog.imgs}  alt="无封面"/>
                   </span>
               </Item>
               <Item>

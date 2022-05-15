@@ -9,7 +9,6 @@ module.exports = async(req,res)=>{
             res.status(401).send(err);
         }else{
             let cateGory = await CateGory.find({});
-            // console.log(cateGory);
             res.send({
                 data:cateGory
             });
