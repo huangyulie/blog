@@ -30,4 +30,10 @@ admin.get("/blog/list",require('./blog/blogList'));
 // 后台搜索博客列表
 admin.get("/blog/search",require('./blog/searchBlog'));
 
+//根据id搜索博客
+admin.get('/blog/id',require('./blog/blogId'));
+
+// 根据id搜索博客分类
+admin.get('/blog/cateId',require('./blog/cateId'));
+
 module.exports = admin;

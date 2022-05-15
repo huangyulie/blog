@@ -63,3 +63,18 @@ export const reqSearchBlog = (values)=>{
     value,
   }})
 }
+
+export const reqId = (values)=>{
+  let {id} = values;
+  return axios.get(`${BASE_URL}/admin/blog/id`,{params:{
+    id,
+  }})
+}
+
+// 查询
+export const reqCateid = (values)=>{
+  let {id} = values;
+  return axios.get(`${BASE_URL}/admin/blog/cateId`,{params:{
+    id,
+  }})
+}

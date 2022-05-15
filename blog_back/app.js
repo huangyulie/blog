@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 
 //连接数据库
 require('./model/connect');
@@ -9,6 +10,9 @@ require('./model/connect');
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// 静态资源
+app.use(express.static(path.join(__dirname,'public')));
 
 
 app.get('/',(req,res)=>{

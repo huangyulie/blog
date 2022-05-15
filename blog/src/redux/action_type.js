@@ -2,3 +2,4 @@
 export const SAVE_USER_INFO = 'SaveUserInfo'; 
 export const DELETE_USER_INFO = 'DELETE_USER_INFO'; 
 export const SAVE_MEUE_INFO = 'SaveMeueInfo';
+export const SAVE_BLOG_INFO = 'SaveBlogInfo';

@@ -1,0 +1,20 @@
+.top {
+  display: flex;
+  align-items: center;
+}
+.item {
+  display: flex;
+  align-items: center;
+}
+.itemspan {
+  font-size: 20px;
+  font-weight: 700;
+  margin-left: 20px;
+}
+.itemdiv {
+  flex: 1;
+  margin-left: 20px;
+}
+.itemdiv img {
+  width: 600px;
+}

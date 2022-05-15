@@ -3,9 +3,13 @@ import { Button, Card, Select, Input,Table } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import {reqBlog,reqSearchBlog} from '../../api/index'
 import {useNavigate} from 'react-router-dom'
+import {connect} from 'react-redux';
+import {createSaveBlogAction} from '../../redux/actions/blog_action'
 
 const { Option } = Select;
-export default function Product() {
+
+
+function Product(props) {
   let [list,setList] = useState();
   let [total,setTotal] = useState();//total总共的东西
   let [isLoading,setIsLoading] = useState(true);
@@ -21,18 +25,19 @@ export default function Product() {
   const data = async(a=1)=>{
     let pagedata;
     if(isSearch === false){
-      pagedata = await reqBlog({page:a,pagesize:4});
+      pagedata = await reqBlog({page:a,pagesize:5});
     }else{
-      pagedata = await reqSearchBlog({page:a,pagesize:4,value:keyWord,name:keyCategory});
+      pagedata = await reqSearchBlog({page:a,pagesize:5,value:keyWord,name:keyCategory});
     }
     let {status,data} = pagedata;
     if(status===1){
-      let {pageNum,total,list} = data;
+      let {pageNum,total} = data;
       setIsLoading(false);
-      setList(list);
+      setList(data.list);
       setTotal(total);
       setCurrent(pageNum);
       }
+      props.saveBlog(data.list);
   }
 
   const search = async()=>{
@@ -92,7 +97,6 @@ export default function Product() {
   }
   const navigate = useNavigate();
   let jump1 = (item)=>{
-    console.log(item);
     navigate(`detail/id=${item._id}`);
   }
   let jump2 = (item)=>{
@@ -137,3 +141,10 @@ export default function Product() {
     </div>
   )
 }
+
+export default connect(
+      state=>{return {}},
+      {
+        saveBlog:createSaveBlogAction,
+      }
+)(Product);
