@@ -1,24 +1,39 @@
-import React,{useEffect, useState} from 'react'
+import React,{useEffect, useState,useRef} from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button, Card, Form, Input,Upload,message,Select} from 'antd'
+import { Button, Card, Form, Input ,message,Select} from 'antd'
 import { LeftOutlined } from '@ant-design/icons'
-import {reqCategory} from '../../api/index';
+import {reqCategory,reqCommitBlog} from '../../api/index';
 import { connect } from 'react-redux';
+import Md from './textarea';
+import Uploadimg from './upload'
 import './Addblog.css'
 import dayjs from 'dayjs'
 const {Option} = Select; 
 
 function Addblog() {
   let [category,setCategory] = useState([]);
+  let [detail,setDetail] = useState();
   let b = useNavigate();
-  const onFinish = (values) => {
+  let myRef = useRef();
+  const onFinish = async(values) => {
+    let img = myRef.current.getImgArr();
+    values.imgs = img[0];
+    values.detail = detail;
+    let a = await reqCommitBlog(values);
+    if(a.status === 1){
+      message.success('提交成功');
+    }
     console.log('Success:', values);
+
   };
 
   const onFinishFailed = (errorInfo) => {
     message.warning('请检查输入是否合法！！!');
   };
 
+  const onHtmlChanged = (h)=>{
+    setDetail(h);
+  }
 
   useEffect(()=>{
     data();
@@ -28,7 +43,6 @@ function Addblog() {
     let req = await reqCategory();
     let {data} = req;
     setCategory([...data]);
-    console.log(category);
   }
 
   return (
@@ -39,7 +53,6 @@ function Addblog() {
           <span className='spanid'>添加博客</span>
         </div>
       } 
-      // loading={true}
       >
         <div>
           <Form
@@ -48,7 +61,7 @@ function Addblog() {
               span: 2,
             }}
             wrapperCol={{
-              span: 16,
+              span: 22,
             }}
             initialValues={{
               people: 'Miroku',
@@ -102,7 +115,7 @@ function Addblog() {
               label="博客封面"
               name="imgs"
             >
-              <Input />
+              <Uploadimg ref={myRef}/>
             </Form.Item>
 
             <Form.Item
@@ -128,19 +141,14 @@ function Addblog() {
                  }
               </Select>
             </Form.Item>
-
+            {/* 博客详情 */}
             <Form.Item
               label="博客详情"
               name="detail"
-              rules={[
-                {
-                  required: true,
-                  message: '请输入你的博客描述',
-                },
-              ]}
             >
-              <Input />
+              <Md onHtmlChanged={onHtmlChanged}/>
             </Form.Item>
+
             <Form.Item
               wrapperCol={{
                 offset: 2,

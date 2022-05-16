@@ -78,3 +78,24 @@ export const reqCateid = (values)=>{
     id,
   }})
 }
+
+export const reqDelete = (value)=>{
+  return axios.post(`${BASE_URL}/img/delete`,{
+    value,
+  })
+}
+
+export const reqCommitBlog = (value)=>{
+  return axios.post(`${BASE_URL}/admin/add/blog`,{
+    value,
+  })
+}
+
+// 修改
+export const reqUploadBlog = (value)=>{
+  let {id,data} = value;
+  return axios.post(`${BASE_URL}/admin/blog/uploadBlog`,{
+    id,
+    data
+  })
+}

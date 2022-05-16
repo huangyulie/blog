@@ -35,5 +35,10 @@ admin.get('/blog/id',require('./blog/blogId'));
 
 // 根据id搜索博客分类
 admin.get('/blog/cateId',require('./blog/cateId'));
+// 提交博客列表
+admin.post('/add/blog',require('./blog/addBlog'));
+
+// 修改博客列表
+admin.post('/blog/uploadBlog',require('./blog/uploadBlog'));
 
 module.exports = admin;

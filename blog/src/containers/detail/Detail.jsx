@@ -3,6 +3,7 @@ import {useNavigate,useLocation} from 'react-router-dom'
 import {Button,Card, List } from 'antd'
 import { reqCateid } from '../../api';
 import {LeftOutlined} from '@ant-design/icons'
+import 'md-editor-rt/lib/style.css';
 import Item from 'antd/lib/list/Item';
 import './detail.css';
 import {connect} from 'react-redux'
@@ -79,7 +80,7 @@ function Detail(props) {
               </Item>
               <Item>
                   <span className='itemspan'>博客详情:</span>
-                  <span dangerouslySetInnerHTML={{__html:blog.detail}} className='itemdiv'></span>
+                  <div id='md-editor-rt-preview' dangerouslySetInnerHTML={{__html:blog.detail}} className='md-preview default-theme'></div>
               </Item>
           </List>
         </Card>

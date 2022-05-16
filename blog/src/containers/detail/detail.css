@@ -16,5 +16,8 @@
   margin-left: 20px;
 }
 .itemdiv img {
-  width: 600px;
+  width: 200px;
+}
+.md-preview {
+  flex: 1;
 }

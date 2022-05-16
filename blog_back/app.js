@@ -28,6 +28,11 @@ const admin = require('./route/admin/admin');
 //后台一级路由
 app.use('/admin',admin);
 
+// 图片路由
+app.post('/img/upload',require('./route/img/img'));
+// 删除图片路由
+app.post('/img/delete',require('./route/img/deleteimg'));
+
 app.listen(4000,()=>{
     console.log("4000端口已打开");
 })
