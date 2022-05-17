@@ -24,8 +24,9 @@ export default function Md(props) {
         );
         callback(res.map((item) => item.data.data.url));
     }
-
-
-    const [text, setText] = useState('hello md-editor-rt!');
+    const [text, setText] = useState(props.md?props.md:'hello md-editor-rt!');
+    props.modelValue(text);
+    // console.log(text);
+    // console.log(Editor);
     return <Editor screenfull={screenful} modelValue={text} onChange={setText} onUploadImg={onUploadImg} onHtmlChanged={props.onHtmlChanged} />;
 }

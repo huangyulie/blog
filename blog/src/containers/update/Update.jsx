@@ -14,6 +14,7 @@ function Addblog() {
   let [category, setCategory] = useState([]);
   let [detail, setDetail] = useState();
   let [blog, setBlog] = useState();
+  let [html,setHtml] = useState();
   let [isLoading, setIsLoading] = useState(true);
   let b = useNavigate();
   let c = useLocation();
@@ -27,6 +28,7 @@ function Addblog() {
     let img = myRef.current.getImgArr();
     values.imgs = `/img/${img[0]}`;
     values.detail = detail;
+    values.html = html;
     let value = {
       data: values,
       id: pathname
@@ -57,6 +59,7 @@ function Addblog() {
     let { data } = req;
     let a = await reqId({ id: pathname });
     setBlog(a);
+    setHtml(a.html);
     setCategory([...data]);
     setIsLoading(false);
     if (myRef.current) {
@@ -66,6 +69,10 @@ function Addblog() {
     } else {
       message.success('稍等');
     }
+  }
+
+  const modelValue = (text)=>{
+    setHtml(text);
   }
   return (
     <div>
@@ -120,7 +127,7 @@ function Addblog() {
                 },
               ]}
             >
-              <Input placeholder='请输入博客描述' defaultValue={blog ? blog.desc : '服务器卡了'} />
+              <Input placeholder='请输入博客描述'/>
             </Form.Item>
 
             <Form.Item
@@ -168,7 +175,7 @@ function Addblog() {
               label="博客详情"
               name="detail"
             >
-              <Md onHtmlChanged={onHtmlChanged} />
+              <Md onHtmlChanged={onHtmlChanged} modelValue={modelValue} md={html}/>
             </Form.Item>
 
             <Form.Item

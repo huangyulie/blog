@@ -8,6 +8,7 @@ const blogSchema = new mongoose.Schema({
     people:String,
     categoryId:String,
     detail:String,
+    html:String
 },{versionKey:false});
 
 const Blog = mongoose.model('Blog',blogSchema);
@@ -21,7 +22,8 @@ async function createUser(){
         people:'打撒',
         categoryId:'627a564c4c297ed5b86f0084',
         detail:`<p>曹尼玛</p><b>哈哈哈</b>我是傻逼`,
-        imgs:'/img/004.jpg'
+        imgs:'/img/004.jpg',
+        html:'12313'
     }).then(()=>{
         console.log("创建成功")
     }).catch(()=>{

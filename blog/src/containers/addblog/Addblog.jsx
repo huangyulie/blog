@@ -15,10 +15,12 @@ function Addblog() {
   let [detail,setDetail] = useState();
   let b = useNavigate();
   let myRef = useRef();
+  let [html,setHtml] = useState();
   const onFinish = async(values) => {
     let img = myRef.current.getImgArr();
     values.imgs = img[0];
     values.detail = detail;
+    values.html = html;
     let a = await reqCommitBlog(values);
     if(a.status === 1){
       message.success('提交成功');
@@ -34,6 +36,10 @@ function Addblog() {
 
   const onHtmlChanged = (h)=>{
     setDetail(h);
+  }
+
+  const modelValue = (text)=>{
+    setHtml(text);
   }
 
   useEffect(()=>{
@@ -147,7 +153,7 @@ function Addblog() {
               label="博客详情"
               name="detail"
             >
-              <Md onHtmlChanged={onHtmlChanged}/>
+              <Md onHtmlChanged={onHtmlChanged} modelValue={modelValue} />
             </Form.Item>
 
             <Form.Item
