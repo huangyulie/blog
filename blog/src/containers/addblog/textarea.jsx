@@ -17,7 +17,7 @@ export default function Md(props) {
                             'Content-Type': 'multipart/form-data'
                         },
                     })
-                        .then((res) => {;rev(res)})
+                        .then((res) => { ; rev(res) })
                         .catch((error) => rej(error));
                 });
             })

@@ -28,12 +28,13 @@ function Addblog() {
     values.imgs = `/img/${img[0]}`;
     values.detail = detail;
     let value = {
-      data:values,
-      id:pathname
+      data: values,
+      id: pathname
     }
     let a = await reqUploadBlog(value);
     if (a.status === 1) {
       message.success('修改成功');
+      b(-1);
     }
     console.log('Success:', values);
   };
@@ -48,19 +49,24 @@ function Addblog() {
 
   useEffect(() => {
     data();
-  }, []);//eslint-disable-line
+  }, [isLoading]);//eslint-disable-line
+
 
   const data = async () => {
     let req = await reqCategory();
     let { data } = req;
-    console.log(pathname);
     let a = await reqId({ id: pathname });
     setBlog(a);
-    console.log(blog);
     setCategory([...data]);
     setIsLoading(false);
+    if (myRef.current) {
+      if (blog) {
+        myRef.current.getImg(a.imgs.substring(5, blog.length));
+      }
+    } else {
+      message.success('稍等');
+    }
   }
-
   return (
     <div>
       <Card title={
@@ -83,9 +89,9 @@ function Addblog() {
             initialValues={{
               people: 'Miroku',
               time: dayjs(+new Date()).format('YYYY-MM-DD'),
-              name:blog ? blog.name : '服务器卡了',
-              desc:blog ? blog.desc : '服务器卡了',
-              categoryId:blog?blog.categoryId:'服务器卡了'
+              name: blog ? blog.name : '服务器卡了',
+              desc: blog ? blog.desc : '服务器卡了',
+              categoryId: blog ? blog.categoryId : '服务器卡了'
             }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}

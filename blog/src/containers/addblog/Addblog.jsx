@@ -22,6 +22,7 @@ function Addblog() {
     let a = await reqCommitBlog(values);
     if(a.status === 1){
       message.success('提交成功');
+      b(-1);
     }
     console.log('Success:', values);
 

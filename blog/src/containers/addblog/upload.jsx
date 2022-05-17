@@ -1,8 +1,8 @@
 import React from 'react';
 import { Upload, Modal, message } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import {BASE_URL} from '../../config/index'
-import {reqDelete} from '../../api/index';
+import { BASE_URL } from '../../config/index'
+import { reqDelete } from '../../api/index';
 
 function getBase64(file) {
   return new Promise((resolve, reject) => {
@@ -21,12 +21,16 @@ class Uploadimg extends React.Component {
     fileList: [],
   };
 
-  getImgArr = ()=>{
+  getImgArr = () => {
     let res = [];
-    this.state.fileList.forEach((item)=>{
+    this.state.fileList.forEach((item) => {
       res.push(item.name);
     })
     return res;
+  }
+
+  getImg = (img) => {
+    this.state.fileList.push({ uid: -1, name: img, url: `${BASE_URL}/img/${img}` });
   }
 
   handleCancel = () => this.setState({ previewVisible: false });
@@ -43,25 +47,25 @@ class Uploadimg extends React.Component {
     });
   };
 
-  handleChange = async({ fileList,file }) =>{
-    console.log(fileList);
-    if(file.status === 'done'){
-      let {url,name} = file.response.data;
-      fileList[fileList.length-1].url = url;
-      fileList[fileList.length-1].name = name;
-      if(file.response.status === 0){
+  handleChange = async ({ fileList, file }) => {
+    // console.log(fileList);
+    if (file.status === 'done') {
+      let { url, name } = file.response.data;
+      fileList[fileList.length - 1].url = url;
+      fileList[fileList.length - 1].name = name;
+      if (file.response.status === 0) {
         message.success('上传成功')
-      }else{
+      } else {
         message.error('上传失败');
       }
     }
-    if(file.status === 'removed'){
-        let data = await reqDelete(file.name);
-        if(data.status === 0){
-          message.success('删除成功');
-        }else{
-          message.error('删除失败');
-        }
+    if (file.status === 'removed') {
+      let data = await reqDelete(file.name);
+      if (data.status === 0) {
+        message.success('删除成功');
+      } else {
+        message.error('删除失败');
+      }
     }
     this.setState({ fileList })
   };
