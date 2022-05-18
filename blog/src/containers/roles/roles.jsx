@@ -1,11 +1,17 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { Card, Button, Table, Modal, Form, Input, message } from 'antd'
 import { PlusOutlined, DropboxOutlined } from '@ant-design/icons'
-import { reqAddrole, reqRolelist } from '../../api/index';
+import { reqAddrole, reqRolelist, reqRolepower } from '../../api/index';
 import { connect } from 'react-redux';
+import Tree from './Tree';
+import { triggerFocus } from 'antd/lib/input/Input';
 
 function Roles(props) {
   let [list, setList] = useState();
+  let [id, setId] = useState();
+  let [menu, setMenu] = useState();
+  let [showMenu, setShowmenu] = useState([]);
+  let [isLoading, setIsloading] = useState(true);
 
   useEffect(() => {
     data();
@@ -13,8 +19,8 @@ function Roles(props) {
 
   const data = async () => {
     let data = await reqRolelist();
+    setIsloading(false);
     setList(data.reverse());
-    console.log(data);
   }
 
   let formRef = useRef(null);
@@ -44,11 +50,11 @@ function Roles(props) {
     },
     {
       title: '操作',
-      dataIndex: 'opra',
+      // dataIndex: 'opra',
       key: 'opra',
       align: 'center',
-      render: () => {
-        return (<Button type='link'>设置权限</Button>)
+      render: (item) => {
+        return (<Button onClick={() => { showModaltree(item) }} type='link'>设置权限</Button>)
       }
     }
   ];
@@ -61,14 +67,12 @@ function Roles(props) {
     try {
       let data = await formRef.current.validateFields();
       let { name } = data;
-      // let people = props.user.username
       let res = await reqAddrole({
         name: name,
       });
       if (res.status === 1) {
         let data1 = await reqRolelist();
         setList(data1.reverse());
-        console.log(res);
         message.success('添加成功');
         setVisible(false);
       } else {
@@ -84,9 +88,37 @@ function Roles(props) {
   };
 
   const handleCancel = () => {
-    console.log('Clicked cancel button');
     setVisible(false);
     formRef.current.resetFields();
+  };
+
+  // 树形菜单
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModaltree = (item) => {
+    setId(item._id);
+    setShowmenu([...item.menus]);
+    setIsModalVisible(true);
+  };
+
+  const getMenu = (arr) => {
+    setMenu([...arr])
+  }
+
+  const handleOktree = async () => {
+    let name = props.user.username;
+    let data = await reqRolepower({
+      id, name, menu
+    });
+    console.log(data);
+    let data1 = await reqRolelist();
+    setList(data1.reverse());
+    message.success('设置成功');
+    setIsModalVisible(false);
+  };
+
+  const handleCanceltree = () => {
+    setIsModalVisible(false);
   };
 
   return (
@@ -94,7 +126,9 @@ function Roles(props) {
       <Card title={
         <div><Button onClick={showModal}><PlusOutlined />添加角色</Button></div>
       } >
-        <Table bordered dataSource={dataSource} columns={columns} rowKey={'_id'} pagination={{ pageSize: 5, showQuickJumper: true }} />
+        <Table
+          loading={isLoading}
+          bordered dataSource={dataSource} columns={columns} rowKey={'_id'} pagination={{ pageSize: 5, showQuickJumper: true }} />
       </Card>
       <Modal
         title="添加角色"
@@ -125,6 +159,18 @@ function Roles(props) {
           </Form.Item>
         </Form>
       </Modal>
+      {/* 属性惨淡 */}
+      <Modal
+        title="设置权限"
+        visible={isModalVisible}
+        onOk={handleOktree}
+        onCancel={handleCanceltree}
+        cancelText="取消"
+        okText="确认"
+      >
+        <Tree getMenu={getMenu} showMenu={showMenu}/>
+      </Modal>
+      {/* 结束 */}
     </div>
   )
 }

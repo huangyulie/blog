@@ -17,7 +17,7 @@ export default function Md(props) {
                             'Content-Type': 'multipart/form-data'
                         },
                     })
-                        .then((res) => { ; rev(res) })
+                        .then((res) => { rev(res) })
                         .catch((error) => rej(error));
                 });
             })
@@ -26,7 +26,5 @@ export default function Md(props) {
     }
     const [text, setText] = useState(props.md?props.md:'hello md-editor-rt!');
     props.modelValue(text);
-    // console.log(text);
-    // console.log(Editor);
     return <Editor screenfull={screenful} modelValue={text} onChange={setText} onUploadImg={onUploadImg} onHtmlChanged={props.onHtmlChanged} />;
 }

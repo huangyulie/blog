@@ -108,3 +108,8 @@ export const reqAddrole = (value)=>{
 export const reqRolelist = ()=>{
   return axios.get(`${BASE_URL}/admin/role/list`,{});
 }
+
+// 提交权限
+export const reqRolepower = (value)=>{
+  return axios.post(`${BASE_URL}/admin/role/power`,value)
+}

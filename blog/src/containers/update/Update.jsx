@@ -196,5 +196,5 @@ function Addblog() {
 }
 
 export default connect(
-
+  
 )(Addblog);

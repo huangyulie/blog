@@ -47,4 +47,7 @@ admin.get('/role/list',require('./role/roleList'));
 // 添加角色列表
 admin.get('/role/addRole',require('./role/addRole'));
 
+// 设置权限
+admin.post('/role/power',require('./role/rolePower'));
+
 module.exports = admin;
