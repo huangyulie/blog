@@ -41,4 +41,10 @@ admin.post('/add/blog',require('./blog/addBlog'));
 // 修改博客列表
 admin.post('/blog/uploadBlog',require('./blog/uploadBlog'));
 
+// 获取角色列表
+admin.get('/role/list',require('./role/roleList'));
+
+// 添加角色列表
+admin.get('/role/addRole',require('./role/addRole'));
+
 module.exports = admin;

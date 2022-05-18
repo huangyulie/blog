@@ -137,10 +137,6 @@ function Addblog() {
             >
               <Select placeholder="请选择你的分类">
                  <Option value="">请选择分类</Option>
-                 {/* <Option value="001">das</Option>
-                 <Option value="002">cfasd</Option>
-                 <Option value="003">大数</Option>
-                 <Option value="004">二七万达</Option> */}
                  {
                    category.map((obj)=>{
                      return (<Option key={obj._id} value={obj._id}>{obj.name}</Option>)
@@ -153,7 +149,7 @@ function Addblog() {
               label="博客详情"
               name="detail"
             >
-              <Md onHtmlChanged={onHtmlChanged} modelValue={modelValue} />
+              <Md onHtmlChanged={onHtmlChanged} modelValue={modelValue} md={null}/>
             </Form.Item>
 
             <Form.Item

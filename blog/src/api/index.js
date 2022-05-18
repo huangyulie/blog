@@ -99,3 +99,12 @@ export const reqUploadBlog = (value)=>{
     data
   })
 }
+
+export const reqAddrole = (value)=>{
+  return axios.get(`${BASE_URL}/admin/role/addRole`,{params:value})
+}
+
+// 获取列表
+export const reqRolelist = ()=>{
+  return axios.get(`${BASE_URL}/admin/role/list`,{});
+}
