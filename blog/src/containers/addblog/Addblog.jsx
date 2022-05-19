@@ -10,7 +10,7 @@ import './Addblog.css'
 import dayjs from 'dayjs'
 const {Option} = Select; 
 
-function Addblog() {
+function Addblog(props) {
   let [category,setCategory] = useState([]);
   let [detail,setDetail] = useState();
   let b = useNavigate();
@@ -71,7 +71,7 @@ function Addblog() {
               span: 22,
             }}
             initialValues={{
-              people: 'Miroku',
+              people: props.user.username,
               time:dayjs(+new Date()).format('YYYY-MM-DD')
             }}
             onFinish={onFinish}
@@ -170,5 +170,5 @@ function Addblog() {
 }
 
 export default connect(
-
+  state=>{return state.userInfo}
 )(Addblog);

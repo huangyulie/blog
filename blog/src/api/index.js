@@ -113,3 +113,17 @@ export const reqRolelist = ()=>{
 export const reqRolepower = (value)=>{
   return axios.post(`${BASE_URL}/admin/role/power`,value)
 }
+
+export const reqUserlist = ()=>{
+  return axios.get(`${BASE_URL}/admin/user/userList`,{});
+}
+
+// 添加用户
+export const reqAddUser = (value)=>{
+  return axios.post(`${BASE_URL}/admin/user/addUser`,value)
+}
+
+export const reqSearchuser = (value)=>{
+  let {_id} = value;
+  return axios.get(`${BASE_URL}/admin/user/searchUser`,{params:{_id}});
+}

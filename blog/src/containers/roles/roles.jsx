@@ -4,7 +4,6 @@ import { PlusOutlined, DropboxOutlined } from '@ant-design/icons'
 import { reqAddrole, reqRolelist, reqRolepower } from '../../api/index';
 import { connect } from 'react-redux';
 import Tree from './Tree';
-import { triggerFocus } from 'antd/lib/input/Input';
 
 function Roles(props) {
   let [list, setList] = useState();
@@ -117,9 +116,10 @@ function Roles(props) {
     setIsModalVisible(false);
   };
 
-  const handleCanceltree = () => {
+  const handleCanceltree = async() => {
     setIsModalVisible(false);
   };
+
 
   return (
     <div>
@@ -168,7 +168,7 @@ function Roles(props) {
         cancelText="取消"
         okText="确认"
       >
-        <Tree getMenu={getMenu} showMenu={showMenu}/>
+        <Tree getMenu={getMenu} showMenu={showMenu} />
       </Modal>
       {/* 结束 */}
     </div>

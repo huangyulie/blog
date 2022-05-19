@@ -50,4 +50,12 @@ admin.get('/role/addRole',require('./role/addRole'));
 // 设置权限
 admin.post('/role/power',require('./role/rolePower'));
 
+// 获取用户列表
+admin.get('/user/userList',require('./user/userList'));
+// 添加用户
+admin.post('/user/addUser',require('./user/addUser'));
+
+// 查找用户
+admin.get('/user/searchUser',require('./user/searchUser'));
+
 module.exports = admin;
