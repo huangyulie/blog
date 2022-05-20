@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Card, Button, Table, Modal, Form, Input, Select, message } from 'antd'
 import { PlusOutlined } from '@ant-design/icons';
-import { reqUserlist, reqRolelist, reqAddUser,reqSearchuser } from '../../api/index';
+import {reqDeleteUser, reqUserlist, reqRolelist, reqUploaduser, reqAddUser, reqSearchuser } from '../../api/index';
 import dayjs from 'dayjs'
 const { Option } = Select;
 
@@ -9,35 +9,93 @@ export default function Users() {
   const [userList, setUserlist] = useState([]);
   const [roleList, setRolelist] = useState([]);
   const [isLoading, setIsloading] = useState(true);
-  const [user,setUser] = useState({});
+  const [user, setUser] = useState({});
+  const [isModalVisiblecheck, setIsModalVisiblecheck] = useState(false);
+  const [userId, setUserid] = useState();
+  const [itemId, setItemid] = useState();
   let formRef = useRef();
 
   useEffect(() => {
     data();
   }, []);
-
   // 
-  const [isModalVisiblecheck, setIsModalVisiblecheck] = useState(false);
-  const showModalcheck = async(item) => {
+  useEffect(() => {
+    h();
+  }, [user]);//eslint-disable-line
+
+  const h = async () => {
+    try {
+      await formRef.current.setFieldsValue(
+        {
+          username: user.username,
+          email: user.email,
+          phone: user.phone,
+          role: user.role
+        });
+
+    } catch (err) {
+      message.warning('稍等一下');
+      return new Promise(() => { });
+    }
+  }
+
+  const showModalcheck = async (item) => {
     let data = await reqSearchuser(item);
+    setUserid(data._id);
     setUser(data);
-    console.log(data);
     setIsModalVisiblecheck(true);
   };
 
-  const handleOkcheck = () => {
-    setIsModalVisiblecheck(false);
+  const handleOkcheck = async () => {
+    try {
+      let data = await formRef.current.validateFields();
+      let res = await reqUploaduser({ id: userId, data: data });
+      console.log(res);
+      setIsModalVisiblecheck(false);
+      formRef.current.resetFields();
+      message.success('添加成功');
+      let data1 = await reqUserlist();
+      setUserlist(data1.reverse());
+    } catch (err) {
+      message.error('提交失败');
+      return new Promise(() => { });
+    }
   };
 
   const handleCancelcheck = () => {
     setIsModalVisiblecheck(false);
   };
   // 
+  //删除
+  const [isModalVisibledelete, setIsModalVisibledelete] = useState(false);
+
+  const handleOkdelete = async () => {
+    try {
+      console.log(itemId);
+      let data = await reqDeleteUser({id:itemId});
+      console.log(data);
+      message.success('删除成功');
+      let data1 = await reqUserlist();
+      setUserlist(data1.reverse());
+      setIsModalVisibledelete(false);
+    } catch (err) {
+      message.warning("删除失败");
+      return new Promise(() => { });
+    }
+  };
+
+  const handleCanceldelete = () => {
+    setIsModalVisibledelete(false);
+  };
+  const deleteModal = (item) => {
+    setIsModalVisibledelete(true);
+    setItemid(item._id)
+  }
+  // 
 
   const data = async () => {
     let data = await reqUserlist();
     let res = await reqRolelist();
-    console.log(res);
     setRolelist(res);
     setUserlist(data.reverse());
     setIsloading(false);
@@ -81,8 +139,8 @@ export default function Users() {
       render: (item) => {
         return (
           <div>
-            <Button type='link' onClick={()=>showModalcheck(item)}>修改</Button>
-            <Button type='link'>删除</Button>
+            <Button type='link' onClick={() => showModalcheck(item)}>修改</Button>
+            <Button type='link' onClick={() => deleteModal(item)}>删除</Button>
           </div>
         )
       }
@@ -261,9 +319,6 @@ export default function Users() {
           wrapperCol={{
             span: 16,
           }}
-          initialValues={{
-            username:user.username,
-          }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
@@ -343,6 +398,17 @@ export default function Users() {
             </Select>
           </Form.Item>
         </Form>
+      </Modal>
+
+      <Modal
+        title="删除用户"
+        visible={isModalVisibledelete}
+        onOk={handleOkdelete}
+        onCancel={handleCanceldelete}
+        okText="确认"
+        cancelText="取消"
+      >
+        <div>你确认删除该用户吗?</div>
       </Modal>
     </div>
   )

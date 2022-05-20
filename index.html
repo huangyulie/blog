@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        /*原子类，公共类*/
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+
+        .inner_c {
+            width: 970px;
+            margin: 0 auto;
+        }
+
+        .cl {
+            clear: both;
+        }
+
+        .h10 {
+            height: 10px;
+        }
+
+        .mb10 {
+            margin-bottom: 10px;
+        }
+
+        .mb8 {
+            margin-bottom: 8px;
+        }
+
+        .mr10 {
+            margin-right: 10px;
+        }
+
+        /*header*/
+        .header {
+            overflow: hidden;
+        }
+
+        .header h1 {
+            float: left;
+            width: 277px;
+            height: 103px;
+            background-color: #FF8888;
+        }
+
+        .header .lang {
+            float: right;
+            width: 137px;
+            height: 49px;
+            background-color: #EEFFBB;
+        }
+
+        .header .nav {
+            float: right;
+            width: 679px;
+            height: 46px;
+            background-color: #EEFFBB;
+        }
+
+        /*content*/
+        .content {
+            overflow: hidden;
+        }
+
+        .content .slide {
+            float: left;
+            width: 310px;
+            height: 435px;
+            line-height: 435px;
+            background-color: #FFEE99;
+            word-wrap: break-word;
+            word-break: break-all;
+            /* overflow: hidden; */
+        }
+
+        .content .main_news {
+            float: left;
+            width: 450px;
+            height: 400px;
+        }
+
+        .content .main_news .main_news1 {
+            height: 240px;
+            background-color: #AAFFEE;
+        }
+
+        .content .main_news .main_news2 {
+            height: 110px;
+            background-color: #AAFFEE;
+        }
+
+        .content .main_news .main_news3 {
+            height: 30px;
+            background-color: #AAFFEE;
+        }
+
+        .content .main_r {
+            float: left;
+            width: 190px;
+            height: 401px;
+            line-height: 401px;
+            background-color: #F08080;
+        }
+
+        .content .main_nav {
+            float: left;
+            width: 650px;
+            height: 25px;
+            background-color: #99FF99;
+        }
+
+        /*footer开始*/
+        .footer {
+            overflow: hidden;
+            width: 970px;
+            height: 35px;
+            background-color: #99BBFF;
+        }
+
+        .right {
+            float: right;
+            width: 0;
+            height: 0;
+            border: 100px transparent solid;
+            border-left: 100px red solid;
+            /* background-color: red; */
+        }
+
+        .left {
+            text-align: center;
+            line-height: 100px;
+            float: right;
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            border-radius: 50%;
+        }
+
+        .asd {
+            float: right;
+            width: 100px;
+            height: 1200px;
+            background-color: rgb(255, 255, 255);
+            font-size: 10px;
+            color: rgb(0, 0, 0);
+            line-height: 2000px;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="main">
+        <!-- header开始 -->
+        <div class="header inner_c" id="abc">
+            <h1>logo</h1>
+            <div class="lang mb8">English</div>
+            <div class="nav">导航</div>
+        </div>
+        <div class="cl h10"></div>
+        <!-- header结束content开始 -->
+        <div class="content inner_c">
+            <div class="slide mr10">
+                (简述一下盒子模型,用答案替代括号里的)
+            </div>
+            <div class="main_news mr10 mb10">
+                <div class="main_news1 mb10">1
+                    <div class="right">我是个三角</div>
+                    <div class="left">我是个圆</div>
+                </div>
+                <div class="main_news2 mb10">
+                    <div> 现在是<input type="time" value="21"></div>
+                    <div>今天是<input type="date"></div>
+                    <div>你的名字<input type="text"></div>
+                    <del>这些东西有手就行</del>
+                    <i><b>战术式后仰</b></i>
+                </div>
+                <div class="main_news3">3</div>
+            </div>
+            <div class="main_r">
+                <img src="https://static-cdn-oss.mosoteach.cn/mssvc/file-type-icons-v2/icon_res_text@2x.png">
+            </div>
+            <div class="main_nav"></div>
+        </div>
+        <div class="cl h10"></div>
+        <!-- content结束footer开始 -->
+        <div class="footer inner_c"></div>
+        <!-- footer结束 -->
+    </div>
+    <div class="asd">
+        <a href="#abc">点击这里</a>
+    </div>
+</body>
+
+</html>

@@ -17,11 +17,11 @@ export const SETTING = [
                 children: [
                     {
                         title: '分类管理',
-                        key: 'category'
+                        key: 'product/category'
                     },
                     {
                         title: '博客管理',
-                        key: 'products'
+                        key: 'product/product'
                     }
                 ]
             },
@@ -39,15 +39,15 @@ export const SETTING = [
                 children: [
                     {
                         title: '柱状图',
-                        key: 'bar'
+                        key: 'charts/bar'
                     },
                     {
                         title: '折线图',
-                        key: 'line'
+                        key: 'charts/line'
                     },
                     {
                         title: '饼图',
-                        key: 'pie'
+                        key: 'charts/pie'
                     },
                 ]
             }

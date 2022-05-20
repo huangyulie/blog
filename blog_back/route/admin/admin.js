@@ -58,4 +58,10 @@ admin.post('/user/addUser',require('./user/addUser'));
 // 查找用户
 admin.get('/user/searchUser',require('./user/searchUser'));
 
+// 修改用户
+admin.post('/user/uploadUser',require('./user/upLoaduser'));
+
+// 删除用户
+admin.get('/user/deleteUser',require('./user/deleteUser'));
+
 module.exports = admin;

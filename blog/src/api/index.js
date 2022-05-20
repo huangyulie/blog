@@ -127,3 +127,14 @@ export const reqSearchuser = (value)=>{
   let {_id} = value;
   return axios.get(`${BASE_URL}/admin/user/searchUser`,{params:{_id}});
 }
+
+// 修改用户
+export const reqUploaduser = (value)=>{
+
+  return axios.post(`${BASE_URL}/admin/user/uploadUser`,value);
+}
+
+// 删除用户
+export const reqDeleteUser = (value)=>{
+  return axios.get(`${BASE_URL}/admin/user/deleteUser`,{params:value});
+}

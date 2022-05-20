@@ -31,7 +31,8 @@ const userSchema = new mongoose.Schema({
         type:Number,
         default:Date.now
     },
-    role:String
+    role:String,
+    roleAll:Object
 });
 //创建集合并应用规则
 const User = mongoose.model('User',userSchema);//courses
