@@ -1,4 +1,4 @@
-const {Blog}  = require('../../../model/blog');
+const { Blog }  = require('../../../model/blog');
 
 module.exports = async(req,res)=>{
     let {id} = req.query;

@@ -31,7 +31,8 @@ function getItem(label, key, icon, children, type) {
 const Left = (props) => {
     console.log(props.menus);
     // const item = [];
-    let { menus } = props;
+    // let { menus = ['home','user','role','product','charts'] } = props;
+    let { menus = ['home','user','role','product','charts'] } = props;
     let items = [];
     menus.map((obj) => {
         if (obj === 'home') {
